@@ -31,12 +31,14 @@ const nextBtn = document.querySelector(".next");
 //devo gestire click quindi
 nextBtn.addEventListener("click", function() {
 
+    prevBtn.classList.remove("hidden")
+
     if (activeItemIndex < (itemsArray.length - 1)) {
     //devo mettere - 1 altrimenti mi farebbe fare un click in più
 
         // rimuovi active dallo slide corrente
         itemsArray[activeItemIndex].classList.remove("active");
-        
+
         // incremento activeIndex
         activeItemIndex++; //diventa 1. Tutto si concentra sull'incremento quindi su questa azione
 
@@ -45,23 +47,29 @@ nextBtn.addEventListener("click", function() {
 
     //se siamo arrivati all'ultima slide
     // nascondo il bottone infatti in css ho creato una classe chiamata hidden
-    } else  {
-        activeItemIndex = 0;
+    if (activeItemIndex === itemsArray.length - 1) {
+        nextBtn.classList.add("hidden");
     }
+}
 });
+
+//nascondiamo bottone di default
+prevBtn.classList.add("hidden");
 
 //da qui gestisco il click
 prevBtn.addEventListener("click", function () {
 
+    nextBtn.classList.remove("hidden");
+
     //rimuovo active dalla slide prec
     itemsArray[activeItemIndex].classList.remove("active");
 
-    //incrementare activeIndex
+    //secrementare activeIndex
     activeItemIndex--;
 
     //aggiungere active a quello nuovo
     itemsArray[activeItemIndex].classList.add("active");
     if (activeItemIndex === 0) {
-    
+        prevBtn.classList.add ("hidden")
     }
 })
