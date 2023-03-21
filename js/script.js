@@ -32,8 +32,8 @@ const nextBtn = document.querySelector(".next");
 
 
 //devo gestire click quindi
-nextBtn.addEventListener("click", function autoPlay(x) {
-    return x;
+nextBtn.addEventListener("click", function () {
+    autoPlay();
 });
 
 //nascondiamo bottone di default
@@ -61,31 +61,23 @@ prevBtn.addEventListener("click", function () {
 
 let timer = setInterval (autoPlay, 3000);
 
-function autoPlay(x) {
-    console.log('autoplay');
-    prevBtn.classList.remove("hidden")
-    return x;
-};
-
-function autoPlay(x) {
-    prevBtn.classList.remove("hidden") 
-    if (activeItemIndex < (itemsArray.length - 1)) {
-    //devo mettere - 1 altrimenti mi farebbe fare un click in più
-
-        // rimuovi active dallo slide corrente
-        itemsArray[activeItemIndex].classList.remove("active");
-
-        // incremento activeIndex
-        activeItemIndex++; //diventa 1. Tutto si concentra sull'incremento quindi su questa azione
-
-        //aggiungo active a quello nuovo quindi a 1 e poi il ciclo ricomincia per l'img successiva
-        itemsArray[activeItemIndex].classList.add("active");
-
-    //se siamo arrivati all'ultima slide
-    // nascondo il bottone infatti in css ho creato una classe chiamata hidden
-    if (activeItemIndex === itemsArray.length - 1) {
-        nextBtn.classList.add("hidden");
-    }
-    return x;
+function autoPlay() {
+    prevBtn.classList.remove("hidden");
+    itemsArray[activeItemIndex].classList.remove("active");
+    activeItemIndex++;
+        // se siamo arrivati all'ultima slide
+        if (activeItemIndex === itemsArray.length) {
+            // reimposto activeIndex sulla prima slide
+            activeItemIndex = 0;
+        }
+    itemsArray[activeItemIndex].classList.add("active");
+        if (activeItemIndex === 0) {
+            prevBtn.classList.add("hidden");
+        }
+        // se siamo all'ultima immagine, nascondo il pulsante next
+        if (activeItemIndex === itemsArray.length - 1) {
+            nextBtn.classList.add("hidden");
+        } else {
+            nextBtn.classList.remove("hidden");
+        }
 }
-};
