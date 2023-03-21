@@ -2,6 +2,9 @@ const imagesArray = ["./img/01.jpg","./img/02.jpg","./img/03.jpg","./img/04.jpg"
 
 const itemsContainer = document.querySelector(".row-items")
 
+// let timer;
+const timerImage = imagesArray;
+
 for (let i = 0; i < imagesArray.length; i++) {
     const currentImage = imagesArray [i];
 
@@ -33,6 +36,7 @@ nextBtn.addEventListener("click", function() {
 
     prevBtn.classList.remove("hidden")
 
+    
     if (activeItemIndex < (itemsArray.length - 1)) {
     //devo mettere - 1 altrimenti mi farebbe fare un click in più
 
@@ -73,3 +77,32 @@ prevBtn.addEventListener("click", function () {
         prevBtn.classList.add ("hidden")
     }
 })
+
+// FUNZIONE AUTOPLAY
+
+let timer = setInterval (autoPlay, 3000);
+
+function autoPlay() {
+    console.log('autoplay');
+    prevBtn.classList.remove("hidden")
+
+    if (activeItemIndex < (itemsArray.length - 1)) {
+    //devo mettere - 1 altrimenti mi farebbe fare un click in più
+
+        // rimuovi active dallo slide corrente
+        itemsArray[activeItemIndex].classList.remove("active");
+
+        // incremento activeIndex
+        activeItemIndex++; //diventa 1. Tutto si concentra sull'incremento quindi su questa azione
+
+        //aggiungo active a quello nuovo quindi a 1 e poi il ciclo ricomincia per l'img successiva
+            itemsArray[activeItemIndex].classList.add("active");
+
+        //se siamo arrivati all'ultima slide
+        // nascondo il bottone infatti in css ho creato una classe chiamata hidden
+        if (activeItemIndex === itemsArray.length - 1) {
+            nextBtn.classList.add("hidden");
+        }
+    }
+}
+
