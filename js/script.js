@@ -32,29 +32,8 @@ const nextBtn = document.querySelector(".next");
 
 
 //devo gestire click quindi
-nextBtn.addEventListener("click", function() {
-
-    prevBtn.classList.remove("hidden")
-
-    
-    if (activeItemIndex < (itemsArray.length - 1)) {
-    //devo mettere - 1 altrimenti mi farebbe fare un click in più
-
-        // rimuovi active dallo slide corrente
-        itemsArray[activeItemIndex].classList.remove("active");
-
-        // incremento activeIndex
-        activeItemIndex++; //diventa 1. Tutto si concentra sull'incremento quindi su questa azione
-
-        //aggiungo active a quello nuovo quindi a 1 e poi il ciclo ricomincia per l'img successiva
-        itemsArray[activeItemIndex].classList.add("active");
-
-    //se siamo arrivati all'ultima slide
-    // nascondo il bottone infatti in css ho creato una classe chiamata hidden
-    if (activeItemIndex === itemsArray.length - 1) {
-        nextBtn.classList.add("hidden");
-    }
-}
+nextBtn.addEventListener("click", function autoPlay(x) {
+    return x;
 });
 
 //nascondiamo bottone di default
@@ -82,10 +61,14 @@ prevBtn.addEventListener("click", function () {
 
 let timer = setInterval (autoPlay, 3000);
 
-function autoPlay() {
+function autoPlay(x) {
     console.log('autoplay');
     prevBtn.classList.remove("hidden")
+    return x;
+};
 
+function autoPlay(x) {
+    prevBtn.classList.remove("hidden") 
     if (activeItemIndex < (itemsArray.length - 1)) {
     //devo mettere - 1 altrimenti mi farebbe fare un click in più
 
@@ -96,13 +79,13 @@ function autoPlay() {
         activeItemIndex++; //diventa 1. Tutto si concentra sull'incremento quindi su questa azione
 
         //aggiungo active a quello nuovo quindi a 1 e poi il ciclo ricomincia per l'img successiva
-            itemsArray[activeItemIndex].classList.add("active");
+        itemsArray[activeItemIndex].classList.add("active");
 
-        //se siamo arrivati all'ultima slide
-        // nascondo il bottone infatti in css ho creato una classe chiamata hidden
-        if (activeItemIndex === itemsArray.length - 1) {
-            nextBtn.classList.add("hidden");
-        }
+    //se siamo arrivati all'ultima slide
+    // nascondo il bottone infatti in css ho creato una classe chiamata hidden
+    if (activeItemIndex === itemsArray.length - 1) {
+        nextBtn.classList.add("hidden");
     }
+    return x;
 }
-
+};
